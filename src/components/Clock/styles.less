@@ -1,0 +1,20 @@
+.canvas-clock {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+
+  canvas {
+    width: 100%;
+    max-width: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    &:nth-of-type(1) {
+      position: relative;
+    }
+  }
+}

@@ -1,19 +1,43 @@
 <template>
   <div id="app-clock">
     <div class="title" v-if="!useSingleSpa">Vue-Clock</div>
+    <div class="time" v-if="!useSingleSpa">{{ time }}</div>
     <Clock />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Clock from './components/Clock/index.vue';
+import { defineComponent, ref, onMounted, onUnmounted } from '@vue/composition-api';
+import Clock from '@/components/Clock/index.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'App',
   inject: ['useSingleSpa'],
   components: {
     Clock,
+  },
+  setup() {
+    const time = ref('--:--:--');
+    const timerRef = ref(0);
+
+    onMounted(() => {
+      getTime();
+      timerRef.value = setInterval(() => {
+        getTime();
+      }, 1000);
+    });
+
+    onUnmounted(() => {
+      clearInterval(timerRef.value);
+    });
+
+    const getTime = () => {
+      time.value = new Date().toTimeString().split(' ')[0];
+    };
+
+    return {
+      time,
+    };
   },
 });
 </script>
