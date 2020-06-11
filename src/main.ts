@@ -36,7 +36,10 @@ const vueLifeCycles = singleSpaVue({
   },
 });
 
-export function bootstrap(props: object) {
+// 主应用使用 Parcel 方式手动挂载
+export const name = 'parcel-clock';
+
+export function bootstrap(props: any) {
   printLog('vue-clock', 'single-spa 模式', 'primary');
   return vueLifeCycles.bootstrap(props);
 }

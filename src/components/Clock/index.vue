@@ -95,7 +95,7 @@ export default defineComponent({
       const cWidth = canvasWidth.value;
       // radius: 半径
       const drawArc = (radius: number) =>
-        canvasBgCtx.arc(cWidth / 2, cWidth / 2, radius, 0, 4 * Math.PI);
+        canvasBgCtx.arc(cWidth / 2, cWidth / 2, radius < 0 ? 0 : radius, 0, 4 * Math.PI);
 
       // 外圈1
       canvasBgCtx.fillStyle = color.bg;
@@ -198,10 +198,7 @@ export default defineComponent({
 
       // 秒针
       const canvasSecondCtx = canvasSecondRef.value!.getContext('2d')!;
-      const secondPoint = {
-        x: cWidth / 2 - 1.5,
-        y: cWidth / 2 + 10,
-      };
+      const secondPoint = { x: cWidth / 2 - 1.5, y: cWidth / 2 + 10 };
       addShadow(canvasSecondCtx);
       drawHandler(canvasSecondCtx, getAngle(second), () => {
         canvasSecondCtx.moveTo(secondPoint.x, secondPoint.y);
@@ -227,7 +224,7 @@ export default defineComponent({
     const drawHandler = (
       ctx: CanvasRenderingContext2D,
       angle: number,
-      draw: () => void,
+      ctxDrawSelf: () => void,
     ) => {
       const cWidth = canvasWidth.value;
       ctx.clearRect(0, 0, cWidth, cWidth);
@@ -236,7 +233,7 @@ export default defineComponent({
       ctx.translate(cWidth / 2, cWidth / 2);
       ctx.rotate(angle);
       ctx.translate(-cWidth / 2, -cWidth / 2);
-      draw();
+      ctxDrawSelf();
       ctx.closePath();
       ctx.fill('nonzero');
       ctx.strokeStyle = color.handStrokeStyle;

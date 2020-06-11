@@ -1,5 +1,5 @@
 <template>
-  <div id="app-clock">
+  <div id="clock">
     <div class="title" v-if="!useSingleSpa">Vue-Clock</div>
     <div class="time" v-if="!useSingleSpa">{{ time }}</div>
     <Clock />
@@ -7,16 +7,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from '@vue/composition-api';
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  onUnmounted,
+  inject,
+} from '@vue/composition-api';
 import Clock from '@/components/Clock/index.vue';
 
 export default defineComponent({
   name: 'App',
-  inject: ['useSingleSpa'],
   components: {
     Clock,
   },
   setup() {
+    const useSingleSpa = inject('useSingleSpa');
     const time = ref('--:--:--');
     const timerRef = ref(0);
 
@@ -37,13 +43,14 @@ export default defineComponent({
 
     return {
       time,
+      useSingleSpa,
     };
   },
 });
 </script>
 
 <style lang="less" scoped>
-#app-clock {
+#clock {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

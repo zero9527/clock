@@ -22,6 +22,7 @@ module.exports = {
     'function-paren-newline': 'off',
     'linebreak-style': [0, 'error', 'windows'],
     'implicit-arrow-linebreak': 'off',
+    'import/no-cycle': 'off',
     'import/no-extraneous-dependencies': 'off',
     indent: 'off',
     'no-nested-ternary': 'off',
