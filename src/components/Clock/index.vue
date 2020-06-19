@@ -12,7 +12,6 @@ import {
   defineComponent,
   onMounted,
   ref,
-  computed,
   onUnmounted,
   reactive,
 } from '@vue/composition-api';
@@ -176,7 +175,7 @@ export default defineComponent({
       const canvasHourCtx = canvasHourRef.value!.getContext('2d')!;
       const hourPoint = { x: cWidth / 2 - 4, y: cWidth / 2 - 8 };
       addShadow(canvasHourCtx);
-      drawHandler(canvasHourCtx, getAngle(hour * 5 + (5 * minute) / 60), () => {
+      drawHandler(canvasHourCtx, getAngle(hour * 5 + minute * (5 / 60)), () => {
         canvasHourCtx.moveTo(hourPoint.x, hourPoint.y);
         canvasHourCtx.lineTo(hourPoint.x, hourPoint.y - 25);
         canvasHourCtx.lineTo(hourPoint.x + 8, hourPoint.y - 25);

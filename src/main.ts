@@ -26,7 +26,6 @@ if (!(window as any).singleSpaNavigate) {
 }
 
 // ============= single-spa 模式启动 =============
-// appOptions.el：挂载的dom节点，在主项目需要有；没有 el 的话会添加到body下
 const vueLifeCycles = singleSpaVue({
   Vue,
   appOptions: {
