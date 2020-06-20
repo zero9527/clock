@@ -44,7 +44,6 @@ export function bootstrap(props: any) {
 }
 
 export function mount(props: object) {
-  console.log('mount: ', props);
   return vueLifeCycles.mount(props);
 }
 
